@@ -42,7 +42,7 @@ module.exports = function makeWebpackConfig(options) {
      */
     config.output = {
         path: __dirname + '/dist',
-        publicPath: BUILD ? '/' : 'http://localhost:8080/',
+        publicPath: BUILD ? '/' : 'http://localhost:8085/',
         filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
         chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
     }
