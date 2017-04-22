@@ -8,10 +8,6 @@
     "material",
     "select"
   ],
-  "files": [
-    "dist/",
-    "lib/"
-  ],
   "description": "React select with Material Design wrote in ES2015(ES6)",
   "scripts": {
     "compile": "rimraf lib && babel src --ignore views --out-dir lib && postcss -u autoprefixer -u postcss-nested -u postcss-quantity-queries -u postcss-extend -o lib/css/reactMaterialSelect.css src/css/reactMaterialSelect.css",
