@@ -8,9 +8,10 @@ class ReactMaterialSelect extends Component {
         let selectedValue = null
 
         // find selected value by dataValue
-        if (props.defaultValue) {
+        if (props.defaultValue || props.controlledValue) {
+            let checkValue = props.defaultValue || props.controlledValue
             selectedValue = this.getOptions().find((value) => {
-                return value.key === props.defaultValue
+                return value.key === checkValue
             })
         }
 
@@ -44,6 +45,23 @@ class ReactMaterialSelect extends Component {
         this.mounted = false
         document.removeEventListener('click', this.handleDocumentClick, false)
         document.removeEventListener('touchend', this.handleDocumentClick, false)
+    }
+
+    componentWillReceiveProps(newProps, oldProps) {
+        let selectedValue
+        if (newProps.controlledValue !== oldProps.controlledValue) {
+            selectedValue = this.getOptions().find((value) => {
+                return value.key === newProps.controlledValue
+            })
+        }
+        this.changeState({
+            isSelected: selectedValue,
+            selected: {
+                label: selectedValue,
+                value: selectedValue,
+            },
+        })
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -180,6 +198,7 @@ class ReactMaterialSelect extends Component {
 ReactMaterialSelect.propTypes = {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     defaultValue: PropTypes.string,
+    controlledValue: PropTypes.string,
     resetLabel: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool,
